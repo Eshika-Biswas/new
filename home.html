@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factory Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Full-screen background image */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1531379410500-44d97c06f5b0?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Frosted glass container */
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px 70px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: #360be4;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .dashboard-container h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .factory-name {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #8108cc;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(to right, #6c5ce7, #a29bfe);
+            color: #bd0808;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        /* Responsive */
+        @media(max-width: 500px) {
+            .dashboard-container {
+                padding: 30px 20px;
+            }
+            .dashboard-container h1 {
+                font-size: 26px;
+            }
+            .factory-name {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Factory Dashboard</h1>
+    <div class="factory-name" id="factoryName">Rice Factory</div>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<script>
+    // Get user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+
+    // Show factory name dynamically
+    document.getElementById('factoryName').textContent = userData.factory_name || 'Rice Factory';
+
+    // Logout function
+    function logout() {
+        localStorage.removeItem('user_data');
+        window.location.href = 'login.html';
+    }
+
+    // Protect page
+    if (!userData || !userData.factory_name) {
+        window.location.href = 'login.html';
+    }
+</script>
+
+</body>
+</html>
